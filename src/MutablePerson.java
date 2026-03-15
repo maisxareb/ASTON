@@ -1,4 +1,4 @@
-class MutablePerson {
+class MutablePerson implements Cloneable {
     private String name;
     private String secondName;
     private int age;
@@ -31,5 +31,19 @@ class MutablePerson {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public MutablePerson clone() {
+        try {
+            return (MutablePerson) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError("Невозможно клонировать объект MutablePerson", e);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return name + " " + secondName + " " + age;
     }
 }

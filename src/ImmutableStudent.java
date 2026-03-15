@@ -4,11 +4,8 @@ public final class ImmutableStudent {
 
     public ImmutableStudent(String id, MutablePerson person) {
         this.id = id;
-        this.person = new MutablePerson(
-                person.getName(),
-                person.getSecondName(),
-                person.getAge()
-        );
+        this.person = person.clone();
+
     }
 
     public String getId() {
@@ -16,11 +13,7 @@ public final class ImmutableStudent {
     }
 
     public MutablePerson getPerson() {
-        return new MutablePerson(
-                person.getName(),
-                person.getSecondName(),
-                person.getAge()
-        );
+        return person.clone();
     }
 }
 
