@@ -3,7 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.Comparator;
 
 public class Main {
     public static void main(String[] args) {
@@ -33,31 +33,30 @@ public class Main {
             students.forEach(System.out::println);
             System.out.println();
 
-            Optional<Integer> resultYear = students.stream()
-                    .flatMap(student -> student.getBooks().stream())
-                    .sorted((b1, b2) -> Integer.compare(b1.getPages(), b2.getPages()))
-                    .distinct()
-                    .filter(book -> book.getYear() > 2000)
-                    .limit(3)
-                    .map(Book::getYear)
-                    .findFirst();
+            System.out.println("=== Книги после 2000 года (первые 3 по кол-ву страниц) ===");
 
-            System.out.println("=== Результат поиска ===");
-            resultYear.ifPresentOrElse(
-                    year -> System.out.println("Найден год выпуска книги:" + year),
-                    () -> System.out.println("Книга, выпущенная после 2000 года, не найдена")
-            );
-
-            System.out.println("\n=== Книги после 2000 года ===");
             students.stream()
                     .flatMap(student -> student.getBooks().stream())
-                    .sorted((b1, b2) -> Integer.compare(b1.getPages(), b2.getPages()))
+                    .sorted(Comparator.comparingInt(Book::getPages))
                     .distinct()
                     .filter(book -> book.getYear() > 2000)
                     .limit(3)
+                    .peek(book -> {
+                        if (book.equals(students.stream()
+                                .flatMap(s -> s.getBooks().stream())
+                                .sorted(Comparator.comparingInt(Book::getPages))
+                                .distinct()
+                                .filter(b -> b.getYear() > 2000)
+                                .findFirst()
+                                .orElse(null))) {
+                            System.out.println("=== Результат поиска ===");
+                            System.out.println("Найден год выпуска книги: " + book.getYear());
+                        }
+                    })
                     .forEach(System.out::println);
+
         } catch (IOException e) {
-            System.out.println("Ошибка при чтении файла" + e.getMessage());
+            System.out.println("Ошибка при чтении файла: " + e.getMessage());
         }
     }
 }

@@ -81,7 +81,6 @@ public class SimpleStudentSystemTest {
             }
         }
 
-        // Дополнительная проверка
         assertTrue(distinctBooks <= 20);
     }
 
@@ -152,7 +151,6 @@ public class SimpleStudentSystemTest {
     @Test
     @DisplayName("Тест 9: Обработка Optional (ifPresentOrElse)")
     void testIfPresentOrElse() {
-        // Тест с существующим значением
         Optional<Integer> presentYear = students.stream()
                 .flatMap(student -> student.getBooks().stream())
                 .filter(book -> book.getYear() > 2000)
@@ -161,7 +159,6 @@ public class SimpleStudentSystemTest {
 
         assertTrue(presentYear.isPresent(), "Должны быть книги после 2000 года");
 
-        // Тест с отсутствующим значением
         Optional<Integer> emptyYear = students.stream()
                 .flatMap(student -> student.getBooks().stream())
                 .filter(book -> book.getYear() > 3000)
@@ -184,16 +181,13 @@ public class SimpleStudentSystemTest {
 
         assertEquals(3, result.size(), "Должно быть 3 книги");
 
-        // Проверяем сортировку
         assertTrue(result.get(0).getPages() <= result.get(1).getPages());
         assertTrue(result.get(1).getPages() <= result.get(2).getPages());
 
-        // Проверяем фильтрацию
         for (Book book : result) {
             assertTrue(book.getYear() > 2000);
         }
 
-        // Проверяем уникальность
         Set<Book> uniqueBooks = new HashSet<>(result);
         assertEquals(result.size(), uniqueBooks.size());
     }
@@ -209,7 +203,6 @@ public class SimpleStudentSystemTest {
         assertNotEquals(book1, book3, "Разные книги не должны быть равны");
         assertEquals(book1.hashCode(), book2.hashCode(), "HashCode одинаковых книг должен совпадать");
 
-        // Проверяем работу distinct
         List<Book> books = Arrays.asList(book1, book2, book3);
         long distinctCount = books.stream().distinct().count();
         assertEquals(2, distinctCount, "Должно быть 2 уникальные книги");
@@ -234,7 +227,6 @@ public class SimpleStudentSystemTest {
     @Test
     @DisplayName("Тест 13: Проверка краевых случаев")
     void testEdgeCases() {
-        // Тест с пустым списком студентов
         List<Student> emptyList = new ArrayList<>();
         Optional<Integer> emptyResult = emptyList.stream()
                 .flatMap(student -> student.getBooks().stream())
@@ -244,7 +236,6 @@ public class SimpleStudentSystemTest {
 
         assertTrue(emptyResult.isEmpty(), "Для пустого списка Optional должен быть пустым");
 
-        // Тест с фильтром, который ничего не найдет
         Optional<Integer> noResult = students.stream()
                 .flatMap(student -> student.getBooks().stream())
                 .filter(book -> book.getYear() > 3000)
@@ -253,7 +244,6 @@ public class SimpleStudentSystemTest {
 
         assertTrue(noResult.isEmpty(), "Для фильтра без результатов Optional должен быть пустым");
 
-        // Тест с limit(0)
         List<Book> zeroLimit = students.stream()
                 .flatMap(student -> student.getBooks().stream())
                 .limit(0)
