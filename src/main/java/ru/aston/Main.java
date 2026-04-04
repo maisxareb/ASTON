@@ -15,7 +15,7 @@ import ru.aston.strategy.ShoppingCart;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("    Демонстрация паттернов проектирования");
+        System.out.println("Демонстрация паттернов проектирования");
 
         System.out.println("1. ПАТТЕРН СТРАТЕГИЯ (Strategy)");
         demonstrateStrategy();
@@ -69,14 +69,14 @@ public class Main {
     }
 
     private static void demonstrateBuilder() {
-        Computer gamingPC = new Computer.ComputerBuilder("Intel i9-13900K", "32GB DDR5")
+        Computer gamingPC = Computer.builder("Intel i9-13900K", "32GB DDR5")
                 .storage("1TB NVMe SSD")
                 .graphicsCard("NVIDIA RTX 4080")
                 .bluetooth(true)
                 .wifi(true)
                 .build();
 
-        Computer officePC = new Computer.ComputerBuilder("Intel i5-13600K", "16GB DDR4")
+        Computer officePC = Computer.builder("Intel i5-13600K", "16GB DDR4")
                 .storage("512GB SSD")
                 .wifi(true)
                 .build();

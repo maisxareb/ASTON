@@ -9,6 +9,6 @@ public class PayPalPayment implements PaymentStrategy {
 
     @Override
     public void pay(int amount) {
-        System.out.println("  Оплачено " + amount + " руб. через PayPal (" + email + ")");
+        System.out.println("Оплачено " + amount + " руб. через PayPal (" + email + ")");
     }
 }

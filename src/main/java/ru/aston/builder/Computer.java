@@ -17,16 +17,20 @@ public class Computer {
         this.wifi = wifi;
     }
 
+    public static ComputerBuilder builder(String cpu, String ram) {
+        return new ComputerBuilder(cpu, ram);
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("  Компьютер:\n");
-        sb.append("    Процессор: ").append(cpu).append("\n");
-        sb.append("    ОЗУ: ").append(ram).append("\n");
-        sb.append("    Накопитель: ").append(storage != null ? storage : "не указан").append("\n");
-        sb.append("    Видеокарта: ").append(graphicsCard != null ? graphicsCard : "встроенная").append("\n");
-        sb.append("    Bluetooth: ").append(bluetooth ? "да" : "нет").append("\n");
-        sb.append("    WiFi: ").append(wifi ? "да" : "нет");
+        sb.append("Компьютер:\n");
+        sb.append("Процессор: ").append(cpu).append("\n");
+        sb.append("ОЗУ: ").append(ram).append("\n");
+        sb.append("Накопитель: ").append(storage != null ? storage : "не указан").append("\n");
+        sb.append("Видеокарта: ").append(graphicsCard != null ? graphicsCard : "встроенная").append("\n");
+        sb.append("Bluetooth: ").append(bluetooth ? "да" : "нет").append("\n");
+        sb.append("WiFi: ").append(wifi ? "да" : "нет");
         return sb.toString();
     }
 

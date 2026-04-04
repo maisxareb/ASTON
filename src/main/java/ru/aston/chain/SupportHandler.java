@@ -13,7 +13,7 @@ public abstract class SupportHandler {
         if (next != null) {
             next.handle(issue, severity);
         } else {
-            System.out.println("  Запрос не может быть обработан: " + issue);
+            System.out.println("Запрос не может быть обработан: " + issue);
         }
     }
 }

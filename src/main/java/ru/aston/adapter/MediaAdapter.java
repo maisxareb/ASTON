@@ -9,13 +9,13 @@ public class MediaAdapter implements MediaPlayer {
 
     @Override
     public void play(String audioType, String filename) {
-        System.out.println("  [Адаптер] Преобразую запрос для формата " + audioType);
+        System.out.println("[Адаптер] Преобразую запрос для формата " + audioType);
         if (audioType.equalsIgnoreCase("mp4")) {
             advancedPlayer.playMp4(filename);
         } else if (audioType.equalsIgnoreCase("vlc")) {
             advancedPlayer.playVlc(filename);
         } else {
-            System.out.println("  [Адаптер] Не могу преобразовать формат: " + audioType);
+            System.out.println("[Адаптер] Не могу преобразовать формат: " + audioType);
         }
     }
 }

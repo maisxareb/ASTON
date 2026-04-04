@@ -9,11 +9,11 @@ public class RealImage implements Image {
     }
 
     private void loadFromDisk() {
-        System.out.println("  [Загрузка] Изображение " + filename + " загружено с диска");
+        System.out.println("[Загрузка] Изображение " + filename + " загружено с диска");
     }
 
     @Override
     public void display() {
-        System.out.println("  [Отображение] Показываем изображение: " + filename);
+        System.out.println("[Отображение] Показываем изображение: " + filename);
     }
 }

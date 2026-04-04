@@ -5,14 +5,24 @@ public class AudioPlayer implements MediaPlayer {
 
     @Override
     public void play(String audioType, String filename) {
-        if (audioType.equalsIgnoreCase("mp3")) {
-            System.out.println("  [AudioPlayer] Воспроизведение MP3: " + filename);
+        AudioFormat format = AudioFormat.fromString(audioType);
+
+        if (format == null) {
+            System.out.println("[AudioPlayer] Ошибка: неподдерживаемый формат " + audioType);
+            return;
         }
-        else if (audioType.equalsIgnoreCase("mp4") || audioType.equalsIgnoreCase("vlc")) {
-            mediaAdapter = new MediaAdapter();
-            mediaAdapter.play(audioType, filename);
-        } else {
-            System.out.println("  [AudioPlayer] Ошибка: неподдерживаемый формат " + audioType);
+
+        switch (format) {
+            case MP3:
+                System.out.println("[AudioPlayer] Воспроизведение MP3: " + filename);
+                break;
+            case MP4:
+            case VLC:
+                mediaAdapter = new MediaAdapter();
+                mediaAdapter.play(audioType, filename);
+                break;
+            default:
+                System.out.println("[AudioPlayer] Ошибка: неподдерживаемый формат " + audioType);
         }
     }
 }
